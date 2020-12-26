@@ -13,7 +13,7 @@ type Props = {
 }
 
 const Movie = ({ movie, refetch }: Props) => {
-  const [toggleMovie] = useMutation(MUTATION)
+  const [toggleMovie, { loading }] = useMutation(MUTATION)
   const history = useHistory()
 
   const handleToggleMovie = async () => {
@@ -36,10 +36,10 @@ const Movie = ({ movie, refetch }: Props) => {
                 <h5 className="ml-1">- {movie.title}</h5>
             </div>
             <div className="cursor-pointer p-2 py-3 rounded hover:bg-red-300" onClick={handleToggleMovie}>
-                <div className="text-xs hidden lg:block">
+                <div className={`text-xs hidden lg:block ${loading ? 'text-gray-400 select-none' : ''}`}>
                     {movie.watched ? 'Unwatch' : 'Mark As Watched'}
                 </div>
-                <div className="flex items-center lg:hidden ml-4">
+                <div className={`flex items-center lg:hidden ml-4 ${loading ? 'text-gray-400 select-none' : ''}`}>
                     {movie.watched ? <i className="text-base material-icons">close</i> : <i className="text-base material-icons">done</i>}
                 </div>
             </div>
