@@ -27,7 +27,7 @@ const Home = () => {
   }
 
   return (
-    <div className="p-8 flex flex-col h-full items-center justify-center">
+    <div className="p-4 flex flex-col h-full items-center justify-center">
       <h1>Ready for a challenge?</h1>
       <button className="mt-4 py-2 px-4 bg-blue-600 rounded-sm shadow transition cursor-pointer hover:shadow-xl active:shadow-none" onClick={handleListCreate}>
         Create a list
