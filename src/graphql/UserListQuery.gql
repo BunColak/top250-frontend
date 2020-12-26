@@ -1,0 +1,13 @@
+query UserListQuery($id: String!){
+  userList(id: $id) {
+    id
+    movies {
+      id
+      title
+      imdbRating
+      link
+      watched
+      imdbId
+    }
+  }
+}
