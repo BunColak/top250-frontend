@@ -1,11 +1,16 @@
-import React from 'react';
+import { gql, useQuery } from "@apollo/client";
+import React from "react";
 
-function App() {
-  return (
-    <div>
-      hello
-    </div>
-  );
-}
+const App = () => {
+  const {data} = useQuery(gql`{
+    movies {
+      title
+    }
+  }`);
+
+  console.log(data);
+  
+  return <div>hello</div>;
+};
 
 export default App;
