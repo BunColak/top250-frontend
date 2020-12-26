@@ -1,0 +1,5 @@
+mutation CreateUserListMutation {
+  createUserList {
+    id
+  }
+}
