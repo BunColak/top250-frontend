@@ -1,0 +1,3 @@
+mutation ToggleMovie($listId: String!, $movieId: Int!) {
+  toggleMovieFromList(listId: $listId, movieId: $movieId)
+}
