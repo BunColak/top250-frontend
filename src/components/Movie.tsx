@@ -34,7 +34,7 @@ const Movie = ({ movie, refetch }: Props) => {
   const watched = loading ? optimisticWatched : movie.watched
 
   return (
-    <div className={`flex items-center justify-between ${movie.watched ? 'bg-gray-400' : 'bg-gray-200'} text-black my-2 p-2 pl-4 rounded-sm shadow cursor-pointer hover:shadow-lg active:shadow-inner`}>
+    <div className={`flex items-center justify-between ${watched ? 'bg-gray-400' : 'bg-gray-200'} text-black my-2 p-2 pl-4 rounded-sm shadow cursor-pointer hover:shadow-lg active:shadow-inner`}>
       <div className="flex flex-col items-baseline">
         <h5>{movie.title}</h5>
         <div className="flex font-semibold text-xs items-baseline">
@@ -44,7 +44,7 @@ const Movie = ({ movie, refetch }: Props) => {
       </div>
       <div className="cursor-pointer p-2 py-3 rounded lg:hover:bg-red-300" onClick={handleToggleMovie}>
         <div className={`text-xs hidden lg:block ${loading ? 'text-gray-400 select-none' : ''}`}>
-          {movie.watched ? 'Unwatch' : 'Mark As Watched'}
+          {watched ? 'Unwatch' : 'Mark As Watched'}
         </div>
         <div className={`flex items-center lg:hidden ml-4 ${loading ? 'text-gray-400 select-none' : ''}`}>
           {watched ? <i className="text-base material-icons">close</i> : <i className="text-base material-icons">done</i>}
