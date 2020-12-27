@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client'
 import { IUserList } from '../types'
 import Movie from '../components/Movie'
 import { getListId, setListId } from '../services/storageService'
+import Copyboard from '../components/Copyboard'
 
 const QUERY = loader('../graphql/UserListQuery.gql')
 
@@ -21,6 +22,7 @@ const List = () => {
   return (
     <div className="flex flex-col min-h-full items-center p-4 w-full mx-auto lg:w-2/3">
       <h1 className="text-2xl font-bold">Your challenge list - {data?.userList.movies.filter(m => m.watched).length}/{data?.userList.movies.length}</h1>
+      <Copyboard />
       <div className="mt-8 w-full">
         {data?.userList.movies.map(m => <Movie key={m.id} movie={m} refetch={refetch} />)}
       </div>
