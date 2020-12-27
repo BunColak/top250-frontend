@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { loader } from 'graphql.macro'
 import { IMovie } from '../types'
 import { useMutation } from '@apollo/client'
@@ -14,6 +14,7 @@ type Props = {
 
 const Movie = ({ movie, refetch }: Props) => {
   const [toggleMovie, { loading }] = useMutation(MUTATION)
+  const [optimisticWatched, setOptimisticWatched] = useState(movie.watched)
   const history = useHistory()
 
   const handleToggleMovie = async () => {
@@ -22,12 +23,15 @@ const Movie = ({ movie, refetch }: Props) => {
       history.push('/')
     }
     try {
+      setOptimisticWatched(r => !r)
       await toggleMovie({ variables: { listId, movieId: movie.id } })
       refetch()
     } catch (e) {
       console.log(e)
     }
   }
+
+  const watched = loading ? optimisticWatched : movie.watched
 
   return (
     <div className={`flex items-center justify-between ${movie.watched ? 'bg-gray-400' : 'bg-gray-200'} text-black my-2 p-2 pl-4 rounded-sm shadow cursor-pointer hover:shadow-lg active:shadow-inner`}>
@@ -43,7 +47,7 @@ const Movie = ({ movie, refetch }: Props) => {
           {movie.watched ? 'Unwatch' : 'Mark As Watched'}
         </div>
         <div className={`flex items-center lg:hidden ml-4 ${loading ? 'text-gray-400 select-none' : ''}`}>
-          {movie.watched ? <i className="text-base material-icons">close</i> : <i className="text-base material-icons">done</i>}
+          {watched ? <i className="text-base material-icons">close</i> : <i className="text-base material-icons">done</i>}
         </div>
       </div>
     </div>
